@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:include filename="common_shape_macros.xacro" />
+<xacro:include filename="inertial_macros.xacro" />
+
+<material name="white">
+    <color rgba="1 1 1 1" />
+</material>
+
+<material name="orange">
+    <color rgba="1 0.3 0.1 1"/>
+</material>
+
+<material name="blue">
+    <color rgba="0.2 0.2 1 1"/>
+</material>
+
+<material name="black">
+    <color rgba="0 0 0 1"/>
+</material>
+
+<!-- BASE LINK-->
+<link name="base_link">
+    
+</link>
+
+<!-- CAHSSIS LINK-->
+ <joint name="body_joint" type = "fixed">
+    <parent link ="base_link" />
+    <child link="body"/>
+    <origin xyz="0.11 0.35 0"/>
+</joint>
+
+<link name="body">
+    <visual>
+        <geometry>
+            <box size="0.408 0.075 0.057"/>
+        </geometry>
+        <material name="white"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <box size="0.408 0.075 0.057"/>
+        </geometry>
+    </collision>
+    <xacro:inertial_box mass="1.113" x="0.408" y="0.075" z="0.057">
+        <origiin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_box>
+</link>
+
+<!-- FRONT BUMPER-->
+
+ <joint name="bumper_joint" type = "fixed">
+    <parent link ="body" />
+    <child link="front_bumper"/>
+    <origin xyz="0.209 0 0"/>
+</joint>
+
+<link name="front_bumper">
+    <visual>
+        <geometry>
+            <box size="0.01 0.265 0.057"/>
+        </geometry>
+        <material name="white"/>
+    </visual>
+    <collision>
+        <geometry>
+            <box size="0.01 0.265 0.057"/>
+        </geometry>
+    </collision>
+    <xacro:inertial_box mass="0.003" x="0.01" y="0.256" z="0.057">
+        <origiin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_box>
+</link>
+<!--REAR LEFT WHEEL AXEL -->
+
+<joint name="rear_Laxel" type="fixed">
+    <parent link="body"/>
+    <child link="rear_left_axel"/>
+    <origin xyz="-0.15 0.0625 0" rpy="-${pi/2} 0 0"/>
+</joint>
+
+<xacro:racer_axel prefix="rear_left" radius="0.023" length="0.05" material="orange"/>
+
+<!-- REAR RIGHT WHEEL AXEL -->
+
+<joint name="rear_Raxel" type="fixed">
+    <parent link="body"/>
+    <child link="rear_right_axel"/>
+    <origin xyz="-0.15 -0.0625 0" rpy="${pi/2} 0 0"/>
+</joint>
+
+<xacro:racer_axel prefix="rear_right" radius="0.023" length="0.05" material="orange"/>
+
+<!-- FRONT LEFT WHEEL AXEL -->
+
+<joint name="front_Laxel" type="fixed">
+    <parent link="body"/>
+    <child link="front_left_axel"/>
+    <origin xyz="0.148 0.0625 0" rpy="-${pi/2} 0 0"/>
+</joint>
+
+<xacro:racer_axel prefix="front_left" radius="0.023" length="0.05" material="orange"/>
+
+<!-- FRONT RIGHT WHEEL AXEL-->
+
+<joint name="front_Raxel" type="fixed">
+    <parent link="body"/>
+    <child link="front_right_axel"/>
+    <origin xyz="0.148 -0.0625 0" rpy="${pi/2} 0 0"/>
+</joint>
+
+<xacro:racer_axel prefix="front_right" radius="0.023" length="0.05" material="orange"/>
+
+<!--REAR LEFT WHEEL-->
+
+<joint name="rear_Lwheel" type="continuous">
+    <parent link="rear_left_axel"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="0 0 0.0475" rpy="0 0 0"/> 
+    <limit effort="100" velocity = "100"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<xacro:wheel prefix="rear_left" radius="0.0483" length="0.045" material="blue"/>
+
+
+<!-- REAR RIGHT WHEEL-->
+
+<joint name="rear_Rwheel" type="continuous">
+    <parent link="rear_right_axel"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="0 0 0.0475" rpy="0 0 0"/> 
+    <limit effort="100" velocity = "100"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<xacro:wheel prefix="rear_right" radius="0.0483" length="0.045" material="blue"/>
+
+<!--FRONT LEFT WHEEL-->
+
+<joint name="front_Lwheel" type="continuous">
+    <parent link="front_left_axel"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0 0 0.0475" rpy="0 0 0"/> 
+    <limit  effort="100" velocity = "100"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<xacro:wheel prefix="front_left" radius="0.0483" length="0.045" material="blue"/>
+
+<!-- FRONT RIGHT WHEEL-->
+
+<joint name="front_Rwheel" type="continuous">
+    <parent link="front_right_axel"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0 0 0.0475" rpy="0 0 0"/> 
+    <limit  effort="100" velocity = "100"/>
+    <axis xyz="0 0 1"/>
+</joint>
+
+<xacro:wheel prefix="front_right" radius="0.0483" length="0.045" material="blue"/>
+
+</robot>
