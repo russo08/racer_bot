@@ -18,19 +18,23 @@
         <color rgba="0 0 0 1"/>
     </material>
 
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
 <!-- BASE LINK-->
     <link name="base_link">
     
     </link>
 
 <!-- CAHSSIS LINK-->
-    <joint name="body_joint" type = "fixed">
+    <joint name="chassis_joint" type = "fixed">
         <parent link ="base_link" />
-        <child link="body"/>
+        <child link="chassis"/>
         <origin xyz="0.15 0 0"/>
     </joint>
 
-    <link name="body">
+    <link name="chassis">
         <visual>
             <geometry>
                 <box size="0.408 0.075 0.057"/>
@@ -55,7 +59,7 @@
 <!-- FRONT BUMPER-->
 
     <joint name="bumper_joint" type = "fixed">
-        <parent link ="body" />
+        <parent link ="chassis" />
         <child link="front_bumper"/>
         <origin xyz="0.209 0 0"/>
     </joint>
@@ -63,7 +67,7 @@
     <link name="front_bumper">
         <visual>
             <geometry>
-                <box size="0.01 0.265 0.057"/>
+                <box size="0.01 0.265 0.0285"/>
             </geometry>
             <material name="white"/>
         </visual>
@@ -79,7 +83,7 @@
 
 <!--REAR LEFT WHEEL AXEL -->
     <joint name="rear_left_axel_joint" type="fixed">
-        <parent link="body"/>
+        <parent link="chassis"/>
         <child link="rear_left_axel_link"/>
         <origin xyz="-0.156 0.059 0" rpy="-${pi/2} 0 0 "/>
     </joint>
@@ -107,7 +111,7 @@
 <!-- REAR RIGHT WHEEL AXEL -->
 
     <joint name="rear_right_axel_joint" type="fixed">
-        <parent link="body"/>
+        <parent link="chassis"/>
         <child link="rear_right_axel_link"/>
         <origin xyz="-0.15 -0.059 0" rpy="${pi/2} 0 0 "/>
     </joint>
@@ -135,7 +139,7 @@
 <!-- FRONT LEFT WHEEL AXEL -->
 
     <joint name="front_left_axel_joint" type="fixed">
-        <parent link="body"/>
+        <parent link="chassis"/>
         <child link="front_left_axel_link"/>
         <origin xyz="0.145 0.059 0" rpy="-${pi/2} 0 0"/>
     </joint>
@@ -163,7 +167,7 @@
 
 <!-- FRONT RIGHT WHEEL AXEL -->
     <joint name="front_right_axel_joint" type="fixed">
-        <parent link="body"/>
+        <parent link="chassis"/>
         <child link="front_right_axel_link"/>
         <origin xyz="0.145 -0.059 0" rpy="${pi/2} 0 0"/>
     </joint>
