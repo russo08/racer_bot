@@ -1,0 +1,1 @@
+/home/dev_pc/dev_ws/src/racer_bot/build/racer_bot/ament_cmake_environment_hooks/local_setup.zsh
